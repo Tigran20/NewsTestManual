@@ -15,17 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * {@link FootballAdapter} knows how to create a list item layout for each earthquake
- * in the data source (a list of {@link Football} objects).
- *
- * These list item layouts will be provided to an adapter view like ListView
- * to be displayed to the user.
- */
-
 public class FootballAdapter extends ArrayAdapter<Football> {
-
-
 
     public FootballAdapter(Context context, List<Football> allFootball) {
         super(context, 0, allFootball);
@@ -45,13 +35,13 @@ public class FootballAdapter extends ArrayAdapter<Football> {
         typeView.setText(currentFootball.getType());
 
         TextView sectionView = listItemView.findViewById(R.id.section_tv);
-        sectionView.setText(currentFootball.getSection());
+        sectionView.setText(currentFootball.getSectionName());
 
         TextView titleView = listItemView.findViewById(R.id.title_tv);
-        titleView.setText(currentFootball.getTitle());
+        titleView.setText(currentFootball.getWebTitle());
 
         TextView dateView = listItemView.findViewById(R.id.date_tv);
-        dateView.setText(currentFootball.getDate());
+        dateView.setText(currentFootball.getWebPublicationDate());
 
         return listItemView;
 

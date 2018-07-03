@@ -4,37 +4,37 @@ package com.example.android.footballnewsapp;
 public class Football {
 
     private String type;
-    private String section;
-    private String date;
-    private String title;
-    private String url;
+    private String sectionName;
+    private String webPublicationDate;
+    private String webTitle;
+    private String webUrl;
 
-    public Football(String typeNews, String sectionName, String newsDate, String webTitle, String Url) {
-        type = typeNews;
-        section = sectionName;
-        date = newsDate;
-        title = webTitle;
-        url = Url;
+    public Football(String type, String sectionName, String webPublicationDate, String webTitle, String webUrl) {
+        this.type = type;
+        this.sectionName = sectionName;
+        this.webPublicationDate = webPublicationDate;
+        this.webTitle = webTitle;
+        this.webUrl = webUrl;
+    }
+
+    public String getSectionName() {
+        return sectionName;
     }
 
     public String getType() {
         return type;
     }
 
-    public String getSection() {
-        return section;
+    public String getWebPublicationDate() {
+        return webPublicationDate;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public String getTitle() {
-        return title;
+    public String getWebTitle() {
+        return webTitle;
     }
 
     public String getUrl() {
-        return url;
+        return webUrl;
     }
 }
 

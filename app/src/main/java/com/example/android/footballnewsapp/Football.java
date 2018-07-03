@@ -33,7 +33,7 @@ public class Football {
         return webTitle;
     }
 
-    public String getUrl() {
+    public String getWebUrl() {
         return webUrl;
     }
 }

@@ -1,23 +1,17 @@
 package com.example.android.footballnewsapp;
 
 import android.content.Context;
-import android.graphics.drawable.GradientDrawable;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class FootballAdapter extends ArrayAdapter<Football> {
 
-    public FootballAdapter(Context context, List<Football> allFootball) {
+    public FootballAdapter(Context context, ArrayList<Football> allFootball) {
         super(context, 0, allFootball);
     }
 
@@ -32,16 +26,19 @@ public class FootballAdapter extends ArrayAdapter<Football> {
         Football currentFootball = getItem(position);
 
         TextView typeView = listItemView.findViewById(R.id.type_tv);
-        typeView.setText(currentFootball.getType());
-
         TextView sectionView = listItemView.findViewById(R.id.section_tv);
-        sectionView.setText(currentFootball.getSectionName());
-
         TextView titleView = listItemView.findViewById(R.id.title_tv);
-        titleView.setText(currentFootball.getWebTitle());
-
         TextView dateView = listItemView.findViewById(R.id.date_tv);
-        dateView.setText(currentFootball.getWebPublicationDate());
+
+        String type = String.valueOf(currentFootball.getType());
+        String sectionName = String.valueOf(currentFootball.getSectionName());
+        String title = String.valueOf(currentFootball.getWebTitle());
+        String date = String.valueOf(currentFootball.getWebPublicationDate());
+
+        typeView.setText(type);
+        sectionView.setText(sectionName);
+        titleView.setText(title);
+        dateView.setText(date);
 
         return listItemView;
 

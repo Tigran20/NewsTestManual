@@ -95,45 +95,39 @@ public class QueryUtils {
     }
 
 
-    private static List<Football> extractFeautureFromJson(String footballJSON) {
+    private static List<Football> extractFeatureFromJson(String footballJSON) {
 
         if (TextUtils.isEmpty(footballJSON)) {
             return null;
         }
 
         List<Football> allFootball = new ArrayList<>();
-
         try {
+            JSONObject baseJsonResponse = new JSONObject(footballJSON);
+            JSONObject response = baseJsonResponse.getJSONObject("response");
 
-            JSONObject baseJsonObject = new JSONObject(footballJSON);
-            JSONObject baseJsonResponse = baseJsonObject.getJSONObject("response");
-
-            // Extract the JSONArray associated with the key called "results",
-            // which represents a list of features (or news).
-            JSONArray newsArray = baseJsonResponse.getJSONArray("results");
+            JSONArray results = response.getJSONArray("results");
 
             // For each news in the newsArray, create an {@link News} object
-            for (int i = 0; i < newsArray.length(); i++) {
-
-                // Get a single news at position i within the list of news
-                JSONObject currentNews = newsArray.getJSONObject(i);
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject currentNews = results.getJSONObject(i);
 
                 String type = currentNews.getString("type");
                 String section = currentNews.getString("sectionName");
-                String author = null;
-
-                JSONArray tagsArray = currentNews.getJSONArray("tags");
-
-                for (int t = 0; t < tagsArray.length(); t++) {
-                    JSONObject tagsObject = tagsArray.getJSONObject(t);
-                    author = tagsObject.getString("webTitle");
-                }
-
                 String date = currentNews.getString("webPublicationDate");
                 String title = currentNews.getString("webTitle");
                 String url = currentNews.getString("webUrl");
 
-                Football football = new Football(type, section, date, title, url);
+                String dateFormat;
+
+                if (date == null) {
+                    dateFormat = " ";
+                } else {
+                    dateFormat = date.substring(11, 16) + "    " + date.substring(0, 10);
+                    dateFormat = dateFormat.replaceAll("-", ".");
+                }
+
+                Football football = new Football(type, section, dateFormat, title, url);
 
                 allFootball.add(football);
 
@@ -161,7 +155,7 @@ public class QueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
         //Extract relevant fields from the JSON response and create a list of {@link Football}
-        List<Football> allFootball = extractFeautureFromJson(jsonResponse);
+        List<Football> allFootball = extractFeatureFromJson(jsonResponse);
 
         //Return the list of {@link Football}
         return allFootball;
